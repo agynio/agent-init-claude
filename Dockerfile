@@ -21,6 +21,10 @@ RUN case "${TARGETARCH}" in \
       -o /tools/claude && \
     chmod +x /tools/claude
 
+RUN apk add --no-cache libgcc libstdc++ && \
+    mkdir -p /tools/lib && \
+    cp /usr/lib/libgcc_s.so.1 /usr/lib/libstdc++.so.6 /tools/lib/
+
 COPY config.json /tools/config.json
 
 ENTRYPOINT ["cp", "-a", "/tools/.", "/agyn-bin/"]

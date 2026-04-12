@@ -43,6 +43,7 @@ jobs:
           set -a
           source versions.env
           echo "AGYND_VERSION=$AGYND_VERSION" >> "$GITHUB_OUTPUT"
+          echo "AGYN_VERSION=$AGYN_VERSION" >> "$GITHUB_OUTPUT"
           echo "CLAUDE_VERSION=$CLAUDE_VERSION" >> "$GITHUB_OUTPUT"
 
       - name: Extract Docker metadata
@@ -66,6 +67,7 @@ jobs:
           push: true
           build-args: |
             AGYND_VERSION=${{ steps.versions.outputs.AGYND_VERSION }}
+            AGYN_VERSION=${{ steps.versions.outputs.AGYN_VERSION }}
             CLAUDE_VERSION=${{ steps.versions.outputs.CLAUDE_VERSION }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}

@@ -2,15 +2,19 @@
 FROM alpine:3.21
 
 ARG AGYND_VERSION
+ARG AGYN_VERSION
 ARG CLAUDE_VERSION
 ARG TARGETARCH
 
-RUN mkdir -p /tools
+RUN mkdir -p /tools/cli
 
 RUN apk add --no-cache curl && \
     curl -fsSL "https://github.com/agynio/agynd-cli/releases/download/v${AGYND_VERSION}/agynd-linux-${TARGETARCH}" \
       -o /tools/agynd && \
-    chmod +x /tools/agynd
+    chmod +x /tools/agynd && \
+    curl -fsSL "https://github.com/agynio/agyn-cli/releases/download/v${AGYN_VERSION}/agyn-linux-${TARGETARCH}" \
+      -o /tools/cli/agyn && \
+    chmod +x /tools/cli/agyn
 
 RUN case "${TARGETARCH}" in \
       amd64) PLATFORM="linux-x64-musl" ;; \

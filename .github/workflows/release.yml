@@ -74,6 +74,12 @@ jobs:
           cache-from: type=gha,scope=agent-init-claude
           cache-to: type=gha,scope=agent-init-claude,mode=max
 
+      - name: Smoke test image in Debian main container
+        run: |
+          TAG="${GITHUB_REF_NAME#v}"
+          ./scripts/smoke-test-image.sh "$IMAGE_NAME:$TAG" linux/amd64
+          ./scripts/smoke-test-image.sh "$IMAGE_NAME:$TAG" linux/arm64
+
       - name: Verify multi-arch manifest
         run: |
           TAG="${GITHUB_REF_NAME#v}"

@@ -16,13 +16,13 @@ docker run --rm --platform "$platform" -v "$volume:/agyn-bin" "$image"
 
 docker run --rm --platform "$platform" -v "$volume:/agyn-bin" debian:bookworm-slim sh -c '
   set -eu
-  test -x /agyn-bin/agynd
-  test -x /agyn-bin/cli/agyn
+  # agynd and the agyn CLI come from their own init images into this same
+  # volume; this image is responsible for the agent CLI alone.
   test -x /agyn-bin/claude
   test -r /agyn-bin/config.json
   grep -q "\"sdk\": \"claude\"" /agyn-bin/config.json
   grep -q "\"bin\": \"/agyn-bin/claude\"" /agyn-bin/config.json
-  PATH=/agyn-bin/cli:/agyn-bin:$PATH
+  PATH=/agyn-bin:$PATH
   export PATH LD_LIBRARY_PATH=/agyn-bin/lib
   command -v claude
   claude --version

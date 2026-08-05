@@ -26,6 +26,7 @@ RUN apk add --no-cache libgcc libstdc++ && \
     mkdir -p /tools/lib && \
     cp /usr/lib/libgcc_s.so.1 /usr/lib/libstdc++.so.6 /tools/lib/
 
-COPY config.json /tools/config.json
+# Outside /tools: the binaries land in /agyn/bin, the config beside them.
+COPY config.json /config.json
 
-ENTRYPOINT ["cp", "-a", "/tools/.", "/agyn/bin/"]
+ENTRYPOINT ["/bin/sh", "-c", "set -e; mkdir -p /agyn/bin; cp -a /tools/. /agyn/bin/; cp /config.json /agyn/config.json; chmod 0644 /agyn/config.json"]

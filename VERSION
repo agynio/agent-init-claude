@@ -1,0 +1,3 @@
+# The only version this repository pins. agynd and the agyn CLI are no longer
+# among its contents, so bumping one agent CLI rebuilds nothing else.
+CLAUDE_VERSION=2.1.97

@@ -20,7 +20,7 @@ RUN apk add --no-cache curl patchelf && \
     mkdir -p /tools/lib && \
     cp "/lib/${MUSL_LOADER}" "/tools/lib/${MUSL_LOADER}" && \
     ln -s "${MUSL_LOADER}" "/tools/lib/${MUSL_LIBC}" && \
-    patchelf --set-interpreter "/agyn-bin/lib/${MUSL_LOADER}" /tools/claude
+    patchelf --set-interpreter "/agyn/bin/lib/${MUSL_LOADER}" /tools/claude
 
 RUN apk add --no-cache libgcc libstdc++ && \
     mkdir -p /tools/lib && \
@@ -28,4 +28,4 @@ RUN apk add --no-cache libgcc libstdc++ && \
 
 COPY config.json /tools/config.json
 
-ENTRYPOINT ["cp", "-a", "/tools/.", "/agyn-bin/"]
+ENTRYPOINT ["cp", "-a", "/tools/.", "/agyn/bin/"]

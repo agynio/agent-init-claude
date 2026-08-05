@@ -1,4 +1,4 @@
 {
   "sdk": "claude",
-  "bin": "/agyn-bin/claude"
+  "bin": "/agyn/bin/claude"
 }
